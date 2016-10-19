@@ -10,7 +10,7 @@ c(c(1,2,3), c(4,5,6))
 c(1,2, "three")
 
 
-#cat - concatenate and print:  Outputs the objects, but with less conversions than print. 
+#cat - concatenate and print:  Outputs the objects, but with less conversions than print, which makes it useful for producing output in user-defined functions. Converts argument to character vectors, concatenates them to a single character vector. 
 
 #c-bind - 
 
