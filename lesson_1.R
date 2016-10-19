@@ -9,6 +9,74 @@ c(c(1,2,3), c(4,5,6))
 #     - they need to be of the same type, though!
 c(1,2, "three")
 
+
+#cat - concatenate and print:  Outputs the objects, but with less conversions than print. 
+
+#c-bind - 
+
+#col, row
+
+#cut - 
+
+#diff - 
+
+#dim -
+
+#rownames, colnames, names - 
+
+#expand.grid - 
+
+#eigen, %*%, lower.tri, upper.tri, diag - 
+
+#gl -
+
+#identical - 
+
+#image -
+
+#library - 
+
+#library - 
+
+#length - 
+
+#jitter - 
+
+#ls - 
+
+#mean,median,max,min - 
+
+#paste - 
+
+#read,csv,read.table,write.csv,write.table - 
+
+#rnorm,pnorm,qnorm -
+
+#runif,rpois -
+
+#rank - 
+
+#sort,rank,order - 
+
+#outer - 
+
+#rep - 
+
+#rowSum - 
+
+#colSum - 
+
+#seq - 
+
+#source - 
+
+#which,which.min,which.max - 
+
+#setdiff,intersect,union - 
+
+#table - 
+
+#with - 
 ################################################
 ## Bonus exercises #############################
 ################################################
