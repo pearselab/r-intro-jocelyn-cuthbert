@@ -50,10 +50,11 @@ for (i in 1:20)
             }
           }
         }
+  }
         
         if(num== 2)  flag = 1
         if(flag ==1) {
-          print("Job:NUMBER")
+          print(paste("Job:NUMBER"))
         } else {
           break
         }
