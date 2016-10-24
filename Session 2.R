@@ -75,9 +75,7 @@ for (num in 1:20) {
     print ("Good:NUMBER")
   } else {
     is_prime3(num)  
-  } else {
-    break
-  }
+  } 
 }
 
 #5. 
