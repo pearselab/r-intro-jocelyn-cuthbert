@@ -79,8 +79,22 @@ for (num in 1:20) {
 }
 
 #5. 
+pop_growth <-function (a, b, c, t){
+  a*exp((-b)*exp(-c)*t)
+}
+pop_growth (30, 1, 10, 4)
 
-#6.
+#6.  I am going to make the following assumptions in order to plot the function for the biologist, because I assume they would tell me things
+#time is 1 year, looking at 12 months in one month increments
+#a= carrying capacity of environment, 30 really cute bunnies/acre, reaches after 3 months
+#b= displacement rate off of -axis.  The study started right at the beginning through their 3 month
+#mating season, so baby bunnies start popping out after the 1 month gestational period right at the 1 time mark. 
+#c= how fast the population grows.  I'm assuming they are looking at rabbits, and they
+#reproduce at a rate of 10 bunnies/month
+#y=4 bunnies
+pop_plot <-function(t, y){
+  plot(t,y, xlab="Months", ylab="Population")}
+pop_plot (12, 4)
 
 #7.
 
