@@ -151,10 +151,10 @@ pop_growth=function(a, b, c, d){
     pop<- a*exp((-b)*exp((-c)*i))
     vector<-c(vector, pop)
   }
-  plot(t,vector, xlab="Months", ylab="Population", col=ifelse(vector>a & vector>b, "purple","black"))
+  plot(t,vector, xlab="Months", ylab="Population", col=ifelse(vector>a | vector>b, "purple","blue"))
 }
 
-pop_growth(280,100,.4,30)
+pop_growth(5,1,.4,30)
 
 #9. Write a function that draws boxes of a specified width and height that look like this (height 3, width 5)
 #so......
