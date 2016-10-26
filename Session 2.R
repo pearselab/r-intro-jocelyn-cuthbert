@@ -97,31 +97,43 @@ pop_growth (30, 1, 10, 4)
 #c= how fast the population grows.  I'm assuming they are looking at rabbits, and they
 #reproduce at a rate of 10 bunnies/month
 #y=4 bunnies
-pop_plot <-function(x, a=30, b=1, c=10){
-  plot(t,y, xlab="Months", ylab="Population")}
-pop_plot (12, 4)
 
-pop_plot <-function(x, a=30, b=1, c=10, t=12){
-  print(paste("The product of these numbers are:", a*exp((-b)*exp(-c)*t)))
-}
-pop_plot(12) #...uses defaults
-pop_plot (10,30,1,12) #doesn't use defaults
+a=30
+b=1
+c=10
+d=12
+tme= c(1:d)
 
-plotgomp <- function(y0,r,maxt){
-  curve(
-    exp(log(y0)*exp(-r*x)),
-    from=0, to=maxt, xlab='Time',
-    ylab='Population',
-    col='mediumblue'
-  )
+pop_growth=function(a, b, c, d){
+  t<-0
+  vector<-0
+  tme= c(1:d)
+  for (i in tme){
+  t<-c(t,i)
+  pop<- a*exp((-b)*exp((-c)*i))
+  vector<-c(vector, pop)
+  }
+  plot(t, vector, xlab="Months", ylab="Population")
 }
-plotgomp(4,6,12)
+
+pop_growth(280,100,.4,30)
+
 
 #7.The biologist has fallen in love with your plotting function, but want to colour y values above a as blue, and y values above b as red. Change your function to allow that.
-pop_plot <-function(t, y){
-  plot(t,y, xlab="Months", ylab="Population", col=ifelse(a<y, "blue", ifelse(y>b, "red", "black")))
+
+pop_growth=function(a, b, c, d){
+  t<-0
+  vector<-0
+  tme= c(1:d)
+  for (i in tme){
+    t<-c(t,i)
+    pop<- a*exp((-b)*exp((-c)*i))
+    vector<-c(vector, pop)
+  }
+  plot(t,vector, xlab="Months", ylab="Population", col=ifelse(a<vector, "blue", ifelse(vector>b, "red", "black")))
 }
-pop_plot(8,6)
+
+pop_growth(280,100,.4,30)
 
 #8.You are beginning to suspect the biologist is taking advantage of you. Modify your function to plot in
 #purple any y value that’s above a and b. Hint: try putting 3==3 & 2==2 and 3==4 | 2==2 into an if
@@ -129,7 +141,20 @@ pop_plot(8,6)
 pop_plot <-function(t, y){
   plot(t,y, xlab="Months", ylab="Population", col=ifelse(y>a & y>b, "purple"))
 }
-pop_plot(8,65)
+
+pop_growth=function(a, b, c, d){
+  t<-0
+  vector<-0
+  tme= c(1:d)
+  for (i in tme){
+    t<-c(t,i)
+    pop<- a*exp((-b)*exp((-c)*i))
+    vector<-c(vector, pop)
+  }
+  plot(t,vector, xlab="Months", ylab="Population", col=ifelse(vector>a & vector>b, "purple","black"))
+}
+
+pop_growth(280,100,.4,30)
 
 #9. Write a function that draws boxes of a specified width and height that look like this (height 3, width 5)
 #so......
