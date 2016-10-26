@@ -1,8 +1,30 @@
 #Session 3.R
 
 #1. Implement a cat class, complete with race and print methods. 
+Rascal <- list(length=40, weight=50, breed="Maine.Coone")
+class(Rascal) <- "cat"
+
+Leo <- list(length=20, weight=25, breed="Stray")
+class(Leo) <- "cat"
+
+class(Rascal)
+class(Leo)
+
+race <- function (first, second){
+  if(!inherits(first, "cat") | !inherits(second, "cat"))
+    stop("you haven't given me two cats!")
+  if(first$weight < second$weight) {
+    print("first cat is the fattest!")
+    return(first)
+  }
+  print("second cat is the fattest!")
+  return(second)
+}
+
+race(Rascal, Leo)
 
 #2. Implement a point class that holds x and y information for a point in space. 
+
 
 #3. Write a distance method that calculates the distance between two points in space. 
 
