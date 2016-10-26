@@ -97,9 +97,25 @@ pop_growth (30, 1, 10, 4)
 #c= how fast the population grows.  I'm assuming they are looking at rabbits, and they
 #reproduce at a rate of 10 bunnies/month
 #y=4 bunnies
-pop_plot <-function(t, y){
+pop_plot <-function(x, a=30, b=1, c=10){
   plot(t,y, xlab="Months", ylab="Population")}
 pop_plot (12, 4)
+
+pop_plot <-function(x, a=30, b=1, c=10, t=12){
+  print(paste("The product of these numbers are:", a*exp((-b)*exp(-c)*t)))
+}
+pop_plot(12) #...uses defaults
+pop_plot (10,30,1,12) #doesn't use defaults
+
+plotgomp <- function(y0,r,maxt){
+  curve(
+    exp(log(y0)*exp(-r*x)),
+    from=0, to=maxt, xlab='Time',
+    ylab='Population',
+    col='mediumblue'
+  )
+}
+plotgomp(4,6,12)
 
 #7.The biologist has fallen in love with your plotting function, but want to colour y values above a as blue, and y values above b as red. Change your function to allow that.
 pop_plot <-function(t, y){

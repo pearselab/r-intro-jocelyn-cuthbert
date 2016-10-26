@@ -10,6 +10,12 @@ class(Leo) <- "cat"
 class(Rascal)
 class(Leo)
 
+new.cat <- function(weight, breed){ 
+  output <- list(weight=weight, breed=breed) 
+  class(output) <- "cat" 
+  return(output) 
+}
+
 race <- function (first, second){
   if(!inherits(first, "cat") | !inherits(second, "cat"))
     stop("you haven't given me two cats!")
