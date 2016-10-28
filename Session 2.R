@@ -51,7 +51,6 @@ is_prime2(7)
 #4. Write a loop that prints out the numbers from 1 to 20, printing "Good:NUMBER" if the number is divisible by five
 #and "Job: NUMBER" if the number is prime, and nothing otherwise. 
 is_prime3 <-function (num) {
-  flag = 0
   if (num >1) {
     flag = 1
     for (i in 2:(num-1)) {
@@ -157,20 +156,63 @@ pop_growth=function(a, b, c, d){
 pop_growth(5,1,.4,30)
 
 #9. Write a function that draws boxes of a specified width and height that look like this (height 3, width 5)
-#so......
-Draw_box <-function(X,Y){
-  box(which = "plot", lty= "solid", dim(X))
-}
-Draw_box(3,5)
 
-Draw_rectangle <-function(X,Y){
-rect(xleft=1, ybottom=1, xright=5, ytop=3, density=NULL, angle=90, col=NULL, border=NULL, lty=par("lty"), lwd=1,...)
+
+
+bx<- function(width, height, txt, symb){
+  for (k in 1:width)
+    cat(symb)
+  cat("\n")
+  
+  for (j in 1:height){
+    cat(symb, txt,  symb, "\n") 
+  }
+  
+  for (i in 1:width)
+    cat(symb)
+  cat("\n")
 }
-symbols(x, y = NULL, stars=(13),
-        inches = TRUE, add = FALSE,
-        fg = par("col"), bg = NA,
-        xlab = NULL, ylab = NULL, main = NULL,
-        xlim = NULL, ylim = NULL, ...)
+
+bx(5,1, " ", "*")
 
 #10.Modify your box function to put text centred inside the box, like this:
+
+bx<- function(width, height, txt, symb){
+  for (k in 1:width)
+    cat(symb)
+  cat("\n")
+  
+  for (j in 1:height){
+    cat(symb, txt,  symb, "\n") 
+  }
+  
+  for (i in 1:width)
+    cat(symb)
+  cat("\n")
+}
+
+bx(32,1, "Coding is a foreign language", "*")
+
+#11.  Modify your box function to build boxes of arbitrary text, taking dimensions specified in terms of
+#dimensions, not the text. For example, box("wdp", 3, 9, "hey") might produce:
+
+bx(5,1, "  Hey  ", "wdp")
+
+
+#12.In ecology, hurdle models are often used to model the abundance of species 
+#found on surveys. They first model the probability that a species will be present 
+#at a site (drawn, for example, from a Bernoulli distribution) and then model the 
+#abundance for any species that is present (drawn, for example, from the Poisson distribution). 
+#Write a function that simulates the abundance of a species at n sites given a
+#probability of presence (p) and that its abundance is drawn from a Poisson with a given λ. 
+#Hint: there is no Bernoulli distribution in R, but the Bernoulli is a special case of what distribution?...
+
+#13. An ecologist really likes your hurdle function (will you never learn?). Write them a function 
+#that simulates lots of species (each with their own p and λ) across n sites. Return the results 
+#in a matrix where each species is a column, and each site a row (this is the standard used for ecology data in R).
+
+#14. Professor Savitzky approaches you with a delicate problem. A member of faculty became disoriented 
+#during fieldwork, and is now believed to be randomly wandering somewhere in the desert surrounding Logan. 
+#He is modelling their progress through time in five minute intervals, assuming they cover a random, 
+#Normally-distributed distance in latitude and longitude in each interval. Could you simulate this process 100 times and plot it for him?
 
