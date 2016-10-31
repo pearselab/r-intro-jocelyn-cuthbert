@@ -207,12 +207,61 @@ bx(5,1, "  Hey  ", "wdp")
 #probability of presence (p) and that its abundance is drawn from a Poisson with a given λ. 
 #Hint: there is no Bernoulli distribution in R, but the Bernoulli is a special case of what distribution?...
 
+presence <- function(p){
+  return(rbinom(1, 1, p))
+}
+#rbinom(n, size, probability)
+
+abundance <- function(p, lam){
+  if(rbinom(1, 1, p) == 1){
+    return(rpois(1, lam))
+  }else{return(0)}
+}
+
+abundance(.1,6)
+
 #13. An ecologist really likes your hurdle function (will you never learn?). Write them a function 
 #that simulates lots of species (each with their own p and λ) across n sites. Return the results 
 #in a matrix where each species is a column, and each site a row (this is the standard used for ecology data in R).
+#If we are storing results, and using columns and rows, we need a matrix
+#First I will create an empty matrix
+
+mat<-matrix(ncol=1, nrow=nrow(data))
+for (i in 1:nrow(data)){
+  results=abundance(data$p, data$lam)
+  mat[i]=c(results)
+}
+print(mat)
+
+mat<- matrix(ncol=1, nrow=nrow(data)) #creating an empty matrix to store results in
+for (i in 1:nrow(data)){
+  results=abundance(data$p, data$lam)
+  mat[i]= c(results)
+}
+print(mat)
+
 
 #14. Professor Savitzky approaches you with a delicate problem. A member of faculty became disoriented 
 #during fieldwork, and is now believed to be randomly wandering somewhere in the desert surrounding Logan. 
 #He is modelling their progress through time in five minute intervals, assuming they cover a random, 
 #Normally-distributed distance in latitude and longitude in each interval. Could you simulate this process 100 times and plot it for him?
 
+rnorm(100,5,.02)
+#this gives you 100 random numbers....but we don't have a mean or standard deviation, 
+#and if you want to plot it you want the point to be able to build on each other 
+#you could probably use it to see the different between a fast young anxious professor 
+#and a old slow calm professor in time before they fell of a cliff. 
+a<-matrix(ncol=1)
+tm<-(t*5)/60 
+#a is matrix of distance over time (in hours that have passed, in 5 min increments)
+t<-100
+for (i in 1:t){
+  movement = runif(1, min=0, max=.5)
+  a[i]=c(movement)
+}
+
+print(round(a, digits=1))
+progress<- cumsum(round(a, digits=1))
+#we need to add up his movement from the 5 minute intervals, not just plot 100 random points. 
+tm <- seq(5, 500, length=length(a)) 
+plot(tm, progress, type="l", xlab="Time (min)", ylab="Movement (miles)")
