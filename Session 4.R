@@ -34,7 +34,10 @@ my_super_awesome_categorical_summary_function <- function(x){
 Rascal <- list(length=40, weight=50, breed="Maine.Coone")
 class(Rascal) <- "cat"
 
-my_super_awesome_categorical_summary_function(Rascal)
+Leo <- list(length=20, weight=25, breed="Stray")
+class(Leo) <- "cat"
+
+my_super_awesome_categorical_summary_function(Leo)
 
 #So this works but is not the most useful function.  I can have it spit back out
 #everything I am putting back in, not sure if I should be having it give me
@@ -44,6 +47,27 @@ my_super_awesome_categorical_summary_function(Rascal)
 #Hint: if your function doesn’t call the functions above, you’re likely doing it wrong.
 
 my_super_awesome_does_it_ALL_summary_function <- function(x){
-  
+  if(is.numeric(x)){
+    return(my_super_awesome_summary_function(x))
+  } else {
+    return(my_super_awesome_categorical_summary_function(x))
+  }
 }
+
+my_super_awesome_does_it_ALL_summary_function(1:20)
+my_super_awesome_does_it_ALL_summary_function(Leo)
+
+#5  A molecular biologist you owe a favour approaches you with a problem. 
+#They have a DNA sequence (e.g., ‘ACGATATACGA’) that they need to group into codons 
+#(groups of three) and translate into proteins (ignoring all complexities of 
+#translation and transcription). Write them a function that will take an arbitrary 
+#input sequence and an arbitrary codon lookup table, and output the translated sequence. 
+#Hint: expand.grid will help you make a demo lookup table.
+
+sequence<-"ATGTGTTCCTGTTAA"
+Codon <-sapply()
+codontable <-matrix(c("start", "stop", "cys", "ser"), ncol=4)
+  colnames("ATG", "TAA", "TGT", "TCC")
+  
+
   
