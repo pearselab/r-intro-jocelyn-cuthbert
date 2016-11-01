@@ -278,14 +278,16 @@ for(i in 1:t) {
     break
     }
 
-Time_to_death <-function(x,y,t){ for(i in 1:t) {
-  movement<-c(x<-(x+rnorm(1))
-              y<-(y+rnorm(1))
-              if (x>5|x<-5)
-                break
-              if (y>5|y<-5)
-                break
-  } return(i)
+Time_to_death <-function(x,y,t){
+  for(i in 1:t){
+  x<-(x+rnorm(1)) 
+  y<-(y+rnorm(1))
+    if (x>5|x<-5)
+      break
+    if (y>5|y<-5)
+      break
+  } 
+return(i)
 }
   
 
