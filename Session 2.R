@@ -270,10 +270,29 @@ plot(tm, progress, type="l", xlab="Time (min)", ylab="Movement (miles)")
 #Simulate X and Y and add it to the previous position
 
 for(i in 1:t) {
-  rnorm(2)
-  if (x>5|< -5)
+  movement<-c(x<-(x+rnorm(1))
+              y<-(y+rnorm(1))
+  if (x>5|x<-5)
     break
-  if (y>5|< -5)
+  if (y>5|y<-5)
     break
-plot(tm, progress, type="l", xlab="Longitude", ylab="Latitude")
     }
+
+Time_to_death <-function(x,y,t){ for(i in 1:t) {
+  movement<-c(x<-(x+rnorm(1))
+              y<-(y+rnorm(1))
+              if (x>5|x<-5)
+                break
+              if (y>5|y<-5)
+                break
+  } return(i)
+}
+  
+
+x<-(x+rnorm(1))
+y<-(y+rnorm(1))
+
+#write a function for number of time stamps until the professor falls off the cliff
+#caculate the average for how the professor takes to die
+#write a function that records the number of times then use a loop in that function
+#write into the loop itself not
