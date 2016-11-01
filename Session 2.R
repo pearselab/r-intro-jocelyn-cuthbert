@@ -270,9 +270,10 @@ plot(tm, progress, type="l", xlab="Time (min)", ylab="Movement (miles)")
 #Simulate X and Y and add it to the previous position
 
 for(i in 1:t) {
-  rnorm(X) rnorm(Y)
+  rnorm(2)
   if (x>5|< -5)
     break
   if (y>5|< -5)
     break
+plot(tm, progress, type="l", xlab="Longitude", ylab="Latitude")
     }
