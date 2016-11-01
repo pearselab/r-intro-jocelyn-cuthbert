@@ -2,9 +2,7 @@
 #random numbers. Use it to create a dataset of 10 variables, each drawn from 
 #a Normal distribution with different means and variances. This can be achieved in one line.
 
-replicate(1, rnorm(10),simplify= "matrix")
-
-#sooo for simplify matrix, array, and vector all look the same?
+replicate(10,rnorm(10,rnorm(1),runif(1, min=0, max=1)))
 
 #2. Make your own version of the summary function for continuous datasets 
 #(like the one you generated above). You don’t have to slavishly replicated 
@@ -15,6 +13,8 @@ myvector <-c(0:10)
 summary(myvector)
 #Mynewsummaryfunction
 my_super_awesome_summary_function<- function(x){
+  matrix(ncol(x), nrow=3)
+  apply()
   mn <-mean(x)
   rng <- range(x)
   return(c(mn,rng))
@@ -28,7 +28,8 @@ my_super_awesome_summary_function(myvector)
 my_super_awesome_categorical_summary_function <- function(x){
     cl <- class(x)
     known <- list(x)
-    return(c(cl,known))
+    #list$length - is there a way for me to call out one of the list items?
+    return(c(cl,list$length))
 }
                                         
 Rascal <- list(length=40, weight=50, breed="Maine.Coone")
@@ -65,7 +66,8 @@ my_super_awesome_does_it_ALL_summary_function(Leo)
 #Hint: expand.grid will help you make a demo lookup table.
 
 sequence<-"ATGTGTTCCTGTTAA"
-Codon <-sapply()
+Codon <-sapply(seq(1,nchar(x),3))
+function(i) substr(x,i,i+2)
 codontable <-matrix(c("start", "stop", "cys", "ser"), ncol=4)
   colnames("ATG", "TAA", "TGT", "TCC")
   

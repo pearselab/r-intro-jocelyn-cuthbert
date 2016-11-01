@@ -17,7 +17,7 @@ for (i in 20:10)
 is_prime <- function (num) {
   if (num == 2) {
     TRUE
-  } else if (any(num%%2:(num-1)==0)) {# see example function of a "any
+  } else if (any(num%%2:(num-1)==0)) { # see example function of a "any
     FALSE
   } else {
       TRUE
@@ -28,12 +28,10 @@ is_prime(7)
 
 
 is_prime2 <-function (num) {
-flag = 0
 if (num >1) {
   flag = 1
   for (i in 2:(num-1)) {
     if ((num %% i) == 0) {
-    flag = 0
     break
     }
   }
@@ -157,8 +155,6 @@ pop_growth(5,1,.4,30)
 
 #9. Write a function that draws boxes of a specified width and height that look like this (height 3, width 5)
 
-
-
 bx<- function(width, height, txt, symb){
   for (k in 1:width)
     cat(symb)
@@ -244,7 +240,8 @@ print(mat)
 #14. Professor Savitzky approaches you with a delicate problem. A member of faculty became disoriented 
 #during fieldwork, and is now believed to be randomly wandering somewhere in the desert surrounding Logan. 
 #He is modelling their progress through time in five minute intervals, assuming they cover a random, 
-#Normally-distributed distance in latitude and longitude in each interval. Could you simulate this process 100 times and plot it for him?
+#Normally-distributed distance in latitude and longitude in each interval. Could you simulate this process 
+#100 times and plot it for him?
 
 rnorm(100,5,.02)
 #this gives you 100 random numbers....but we don't have a mean or standard deviation, 
@@ -265,3 +262,17 @@ progress<- cumsum(round(a, digits=1))
 #we need to add up his movement from the 5 minute intervals, not just plot 100 random points. 
 tm <- seq(5, 500, length=length(a)) 
 plot(tm, progress, type="l", xlab="Time (min)", ylab="Movement (miles)")
+
+#15.
+#for(i in 1:t)
+#rnorm2 (1 for X change 1 for Y change)
+#store the last position
+#Simulate X and Y and add it to the previous position
+
+for(i in 1:t) {
+  rnorm(X) rnorm(Y)
+  if (x>5|< -5)
+    break
+  if (y>5|< -5)
+    break
+    }
