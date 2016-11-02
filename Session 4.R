@@ -2,7 +2,7 @@
 #random numbers. Use it to create a dataset of 10 variables, each drawn from 
 #a Normal distribution with different means and variances. This can be achieved in one line.
 
-replicate(10,rnorm(10,rnorm(1),runif(1, min=0, max=1)))
+replicate(1,rnorm(10,rnorm(1),runif(1, min=0, max=1)))
 
 #2. Make your own version of the summary function for continuous datasets 
 #(like the one you generated above). You don’t have to slavishly replicated 
@@ -67,9 +67,16 @@ my_super_awesome_does_it_ALL_summary_function(Leo)
 
 sequence<-"ATGTGTTCCTGTTAA"
 Codon <-sapply(seq(1,nchar(x),3))
-function(i) substr(x,i,i+2)
+function(i) substr(sequence,i,i+2)
 codontable <-matrix(c("start", "stop", "cys", "ser"), ncol=4)
   colnames("ATG", "TAA", "TGT", "TCC")
-  
 
+  
+  
+codon <- c("ATG", "TAA", "TGT", "TCC")
+proteins <- c("start", "stop", "cys", "ser")
+
+codontable <- as.data.frame(cbind(codon,proteins))
+  
+table
   

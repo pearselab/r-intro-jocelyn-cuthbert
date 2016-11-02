@@ -57,19 +57,23 @@ distance1(pt.a, pt.b)
 #so not a method, a class. 
 
 new.line <- function(x,y){ 
-  output <- list(x-y) #or some distance function?
+  output <- list(x,y) #or some distance function?
   class(output) <- "line" 
   return(output) 
 }
-#Not totally sure how to implement a funciton for a class- in 
-#this case you want it to draw a line?  Or just in theory draw a line
-#I think we are just creating a line class for the polygon function 
-#And maybe using the distance method within the class for output?
 
-Line1 <- list(x=2,5, y=7,3)
+lin.a <- list(x=2,5, y=7,3)
 class(Line1) <- "line"
 
-class(Line1)
+lin.b <- list(x=7,5, y=9,2)
+class(Line1) <- "line"
+
+lin.c <- list(x=3,6, y=6,12)
+class(Line1) <- "line"
+
+class(lin.a)
+class(lin.b)
+class(lin.c)
 
 #5. Implement a polygon class that stores a polygon from point objects. Hint: a polygon is really just a
 #load of lines.
@@ -79,10 +83,35 @@ class(Line1)
 #every posisble combo, just 1 to 2, 2 to 3, etc. 
 #so store the last point or last line?
 
+new.poly <- function(lin.a,lin.b,lin.c){ 
+  output <- list(lin.a,lin.b,lin.c) 
+  class(output) <- "polygon" 
+  return(output) 
+}
+
+poly.a <- list(lin.a, lin.b, lin.c)
+class(poly.a) <- "polygon"
+
+class(poly.a)
+      
 #6. Write plot methods for point and line objects. 
 
 #won't do until I have the point and line objects done
 plot(x, y, ...)
+#method is a function that applies to a class
+#plot.line = function draws a line
+#plot something using plot
+#plot(1, 3)
+#plot(3 ~ 1)
+
+plot(1:2, 4:5, type="l")
+
+plot.line <- function (pt.a,pt.b){
+  plot(pt.a$x:pt.a$y, pt.b$x:pt.b$y, type="l")
+}
+
+plot.line(pt.a,pt.b)
+
 #type we want is b = both points and lines, or just p points l lines
 #don't need titles
 #x<-list(1,2,3)
@@ -92,6 +121,14 @@ plot(x, y, ...)
 
 
 #7. Write a plot method for a polygon. Hint: if this isn’t trivial, you’re doing something wrong. 
+
+
+
+
+plot(1:2, 4:5, type="l")
+
+points(1, 3)
+lines(1:2, 3:4)
 
 
 #8. Create a canvas object that the add function can add point, line, circle, and polygon objects to.
