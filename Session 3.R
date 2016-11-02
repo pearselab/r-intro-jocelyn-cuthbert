@@ -40,15 +40,18 @@ new.point <- function(x,y){
   return(output) 
 }
 
-pt1 <-new.point(42,1)
-pt2 <-new.point(4,10)
-pt3 <-new.point(2,12)
+pt.a <-new.point(42,1)
+pt.b <-new.point(4,10)
+pt.c <-new.point(2,12)
 
 #3. Write a distance method that calculates the distance between two points in space. 
-#a^2+b^2=c^2
-#A method can only give us one thing back - in this case I want distance
-dist(pt3, method = "euclidean", diag = FALSE, upper = FALSE, p = 2)
+#a^2+b^2=c^2 = sqrt(((pt2$x-pt1$x)^2)+((pt2$y-pt1$y)^2))
 
+distance1 <- function(pt1,pt2, ...){
+  dif <- sqrt (( (pt2$x-pt1$x) ^2) + ( (pt2$y-pt1$y) ^2) )
+  return(dif)
+}
+distance1(pt.a, pt.b)
 
 #4. Implement a line class that takes two point objects and makes a line between them. 
 #so not a method, a class. 

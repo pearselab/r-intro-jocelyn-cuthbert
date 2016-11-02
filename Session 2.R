@@ -222,20 +222,15 @@ abundance(.1,6)
 #If we are storing results, and using columns and rows, we need a matrix
 #First I will create an empty matrix
 
+#Put in a example data set on my computer
 mat<-matrix(ncol=1, nrow=nrow(data))
+species_site <- function (data)
 for (i in 1:nrow(data)){
   results=abundance(data$p, data$lam)
   mat[i]=c(results)
 }
-print(mat)
-
-mat<- matrix(ncol=1, nrow=nrow(data)) #creating an empty matrix to store results in
-for (i in 1:nrow(data)){
-  results=abundance(data$p, data$lam)
-  mat[i]= c(results)
-}
-print(mat)
-
+species_site(data)
+mat
 
 #14. Professor Savitzky approaches you with a delicate problem. A member of faculty became disoriented 
 #during fieldwork, and is now believed to be randomly wandering somewhere in the desert surrounding Logan. 
@@ -248,20 +243,17 @@ rnorm(100,5,.02)
 #and if you want to plot it you want the point to be able to build on each other 
 #you could probably use it to see the different between a fast young anxious professor 
 #and a old slow calm professor in time before they fell of a cliff. 
-a<-matrix(ncol=1)
-tm<-(t*5)/60 
-#a is matrix of distance over time (in hours that have passed, in 5 min increments)
-t<-100
-for (i in 1:t){
-  movement = runif(1, min=0, max=.5)
-  a[i]=c(movement)
-}
 
-print(round(a, digits=1))
-progress<- cumsum(round(a, digits=1))
-#we need to add up his movement from the 5 minute intervals, not just plot 100 random points. 
-tm <- seq(5, 500, length=length(a)) 
-plot(tm, progress, type="l", xlab="Time (min)", ylab="Movement (miles)")
+Professor_walking <-function(x,y,t){
+  for(i in 1:t){
+    x<-(x+rnorm(1)) 
+    y<-(y+rnorm(1))
+    a[i]=c(x)
+    b[i]=c(y)
+  } 
+plot(a, b, type="l", xlab="Latitude", ylab="Longitude")
+}
+Professor_walking(0,0,100)
 
 #15.
 #for(i in 1:t)
@@ -269,30 +261,19 @@ plot(tm, progress, type="l", xlab="Time (min)", ylab="Movement (miles)")
 #store the last position
 #Simulate X and Y and add it to the previous position
 
-for(i in 1:t) {
-  movement<-c(x<-(x+rnorm(1))
-              y<-(y+rnorm(1))
-  if (x>5|x<-5)
-    break
-  if (y>5|y<-5)
-    break
-    }
-
 Time_to_death <-function(x,y,t){
   for(i in 1:t){
   x<-(x+rnorm(1)) 
   y<-(y+rnorm(1))
-    if (x>5|x<-5)
+    if (x>5|x< -5)
       break
-    if (y>5|y<-5)
+    if (y>5|y< -5)
       break
   } 
 return(i)
 }
   
-
-x<-(x+rnorm(1))
-y<-(y+rnorm(1))
+Time_to_death(0,0,100)
 
 #write a function for number of time stamps until the professor falls off the cliff
 #caculate the average for how the professor takes to die
