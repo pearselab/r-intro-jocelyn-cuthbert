@@ -40,9 +40,9 @@ new.point <- function(x,y){
   return(output) 
 }
 
-pt.a <-new.point(42,1)
-pt.b <-new.point(4,10)
-pt.c <-new.point(2,12)
+pt.a <-new.point(2,1)
+pt.b <-new.point(4,1)
+pt.c <-new.point(2,2)
 
 #3. Write a distance method that calculates the distance between two points in space. 
 #a^2+b^2=c^2 = sqrt(((pt2$x-pt1$x)^2)+((pt2$y-pt1$y)^2))
@@ -52,6 +52,8 @@ distance1 <- function(pt1,pt2, ...){
   return(dif)
 }
 distance1(pt.a, pt.b)
+
+
 
 #4. Implement a line class that takes two point objects and makes a line between them. 
 #so not a method, a class. 
@@ -83,7 +85,7 @@ class(lin.c)
 #every posisble combo, just 1 to 2, 2 to 3, etc. 
 #so store the last point or last line?
 
-new.poly <- function(lin.a,lin.b,lin.c){ 
+new.polygon <- function (lin.a,lin.b,lin.c){ 
   output <- list(lin.a,lin.b,lin.c) 
   class(output) <- "polygon" 
   return(output) 
@@ -95,34 +97,113 @@ class(poly.a) <- "polygon"
 class(poly.a)
       
 #6. Write plot methods for point and line objects. 
-
-#won't do until I have the point and line objects done
-plot(x, y, ...)
 #method is a function that applies to a class
 #plot.line = function draws a line
 #plot something using plot
 #plot(1, 3)
 #plot(3 ~ 1)
+#plot(1:2, 4:5, type="l")
 
-plot(1:2, 4:5, type="l")
+plot.points <- function (pt.a,...){
+  plot(pt.a$x,pt.a$y)
+}
+plot.points(pt.a)
+#works, but this is only one point
+plot.points <- function (pt.a, pt.b, ...){
+  plot(pt.a$x:pt.a$y, pt.b$x:pt.b$y)
+}
+plot.points <- function (pt.a, pt.b, ...){
+  plot(pt.a$x:pt.b$x, pt.a$y:pt.b$y)
+}
+plot.points(pt.a,pt.b)
+#got an error: Error in xy.coords(x, y, xlabel, ylabel, log) : 
+#'x' and 'y' lengths differ for both versions
 
-plot.line <- function (pt.a,pt.b){
-  plot(pt.a$x:pt.a$y, pt.b$x:pt.b$y, type="l")
+plot.points <- function (pt.a, pt.b, ...){
+  plot(pt.a$x, pt.a$y, pt.b$x, pt.b$y)
+}
+plot.points(pt.a, pt.b)
+
+# got an invalid xlim value error message...
+#tried this then:
+
+plot.points <- function (pt.a, pt.b, ...){
+  plot(pt.a$x, pt.a$y, pt.b$x, pt.b$y, xlim <- (0,10), ylim <- (0,10)
+}
+plot.points(pt.a, pt.b)
+#error  Error in strsplit(log, NULL) : non-character argument
+
+plot.points <- function (pt.a, pt.b, ...){
+  plot(pt.a$x, pt.a$y, pt.b$x, pt.b$y, xlim=c(0,10), ylim=c(0,10))
+}
+plot.points(pt.a, pt.b)
+# Error in strsplit(log, NULL) : non-character argument
+#merpmerpmerp
+
+#ok giving up a bit, plotting a line
+
+plot.line <- function (pt.a, pt.b, ...){
+  segments(pt.a$x, pt.a$y, pt.b$x, pt.b$y)
+}
+plot.line <- function (pt.a, pt.b, ...){
+  segments(pt.a$x,pt.a$y,pt.b$x, pt.b$y)
+}
+plot.line (pt.a, pt.b) 
+
+#error wants me to call new.plot
+#wait....not a function to create a new plot
+#but a already existing function 
+#This function (frame is an alias for plot.new) 
+#causes the completion of plotting in the current plot (if there is one) 
+#and an advance to a new graphics frame. This is used in all high-level plotting 
+#functions and also useful for skipping plots when a multi-figure region is in use.
+#ok..... so
+
+plot.new(pt.a, pt.b, pt.c)
+
+#tried just running it
+#gave me the same error
+#segments: Draw line segments between pairs of points.
+#maybe not the one I want to be using?
+
+plot.line <- function (pt.a, pt.b, pt.c, ...){
+  plot.new(pt.a, pt.b, pt.c)
+  segments(pt.a$x,pt.a$y,pt.b$x, pt.b$y, pt.c$x,pt.c$y)
+}
+plot.line (pt.a, pt.b, pt.c)
+
+new.plot <- function (pt.a,pt.b,pt.c){ 
+  output <- list(pt.a,pt.b,pt.c) 
+  class(output) <- "plot" 
+  return(output) 
+}  
+
+
+plot_1 <- function (pt.a,pt.b,pt.c){ 
+  output <- plot.line (pt.a,pt.b,pt.c) 
 }
 
-plot.line(pt.a,pt.b)
+plot.1 <-new.plot(pt.a,pt.b,pt.c)
 
-#type we want is b = both points and lines, or just p points l lines
-#don't need titles
-#x<-list(1,2,3)
-#y<-list(1,2,3)
-#?Is this how I tell it what the different points are?
+plot.line(pt.a,pt.b,pt.c)
+
 #... refers to arguments passed down from a calling function...so I need a function first
 
+plot.new(line1,line2,line3)
+line1<-new.line(pt.a$x, pt.a$y, pt.c$x, pt.c$y)
+line2<- new.line(pt.b$x, pt.b$y, pt.c$x, pt.c$y)
+line3<- new.line(pt.a$x, pt.a$y, pt.b$x, pt.b$y)
 
 #7. Write a plot method for a polygon. Hint: if this isn’t trivial, you’re doing something wrong. 
+plot_poly <- function (lin.a,lin.b,lin.c,...){
+  x <- list(lin.a$x,lin.b$x,lin.c$x)
+  y <- list(lin.a$y,lin.b$y,lin.c$y)
+  polygon (x,y)
+}
+plot_poly(pt.a,pt.b,pt.c)
 
-
+#gah still mad at me for not calling plot new.
+# the difference between 
 
 
 plot(1:2, 4:5, type="l")
