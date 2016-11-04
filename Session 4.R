@@ -84,6 +84,18 @@ table
 
 DNAsequence1 <-'ATGTGTTCCTGTTAA'
 DNAsequence2 <- "ATG"
+what.it.all.means <- (c("start", "stop", "cys", "ser"))
+codon <- (c("ATG", "TAA", "TGT", "TCC"))
+codontable <- as.data.frame(cbind(codonmatrix, codon))
+codontable
+
+translate <- function (x, table){
+  codons <- sapply (seq (1, nchar (x), 3), function (i) substr(x,i,i+2))
+  matchy <- match (codons, table$codon)
+  return(paste(codontable$what.it.all.means[matchy]))
+}
+
+translate(DNAsequence1, codontable)
 
 translate <- function (x){
   codons <- sapply(seq (1, nchar (x), 3), function (i) substr(x,i,i+2))
@@ -94,8 +106,6 @@ translate <- function (x){
     return(codontable$i)
   }
 }
-
-translate(DNAsequence1)
 
 #apparently I messed up making the DNA sequence an object correctly...
 class(DNAsequence1)
