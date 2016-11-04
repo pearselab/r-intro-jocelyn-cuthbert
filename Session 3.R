@@ -58,20 +58,15 @@ distance1(pt.a, pt.b)
 #4. Implement a line class that takes two point objects and makes a line between them. 
 #so not a method, a class. 
 
-new.line <- function(x,y){ 
-  output <- list(x,y) #or some distance function?
+new.line <- function(x1,y1,x2,y2){ 
+  output <- list(x1,y1,x2,y2) #or some distance function?
   class(output) <- "line" 
   return(output) 
 }
 
-lin.a <- list(x=2,5, y=7,3)
-class(Line1) <- "line"
-
-lin.b <- list(x=7,5, y=9,2)
-class(Line1) <- "line"
-
-lin.c <- list(x=3,6, y=6,12)
-class(Line1) <- "line"
+lin.a <- new.line(2,1,4,1)
+lin.b <- new.line(4,1,2,2)
+lin.c <- new.line(2,2,2,1)
 
 class(lin.a)
 class(lin.b)
@@ -91,8 +86,7 @@ new.polygon <- function (lin.a,lin.b,lin.c){
   return(output) 
 }
 
-poly.a <- list(lin.a, lin.b, lin.c)
-class(poly.a) <- "polygon"
+poly.a <- new.polygon(lin.a, lin.b, lin.c)
 
 class(poly.a)
       
@@ -113,7 +107,7 @@ plot.points <- function (pt.a, pt.b, ...){
   plot(pt.a$x:pt.a$y, pt.b$x:pt.b$y)
 }
 plot.points <- function (pt.a, pt.b, ...){
-  plot(pt.a$x:pt.b$x, pt.a$y:pt.b$y)
+  plot(c(pt.a$x,pt.b$x) c(pt.a$y,pt.b$y))
 }
 plot.points(pt.a,pt.b)
 #got an error: Error in xy.coords(x, y, xlabel, ylabel, log) : 
@@ -240,17 +234,19 @@ plot.canvas (pt.c, pt.b, pt.a)
 #9. Implement a circle object that takes a point and a radius and 
 #stores a circle. Don’t make a circle out of lines!
 
-  
+new.circle <- function (x, y, r){
+  output <- list(x=x, y=y, r=r)
+  class(output) <- "circle"
+  return(output)
+}
+circle.a <- new.circle (2,2,5)
+class(circle.a)
 
 #10. Write area generic methods for circle and polygon objects. 
-area <- function(pt.a,pt.b,pt.c){
+area <- function (pt.a,pt.b,pt.c){
   distance1(pt.a,pt.b,pt.c)
-  
 }
-area <- function (r){
-  UseMethod("area")
-}
-area(5)
+area(pt.a,pt.b,pt.c)
 
 #circle worked, polygon didn't
 #really a polygon is more difficult than a circle though

@@ -513,7 +513,9 @@ Time_to_death(0,0,100)
 ##   Session #3    #############################
 ################################################
 
-#1.  
+#Session 3.R
+
+#1. Implement a cat class, complete with race and print methods. 
 Rascal <- list(length=40, weight=50, breed="Maine.Coone")
 class(Rascal) <- "cat"
 
@@ -542,7 +544,8 @@ race <- function (first, second){
 
 race(Rascal, Leo)
 
-#2. 
+#2. Implement a point class that holds x and y information for a point in space. 
+
 x2y25 <- list(x=2, y=25)
 class(x2y25) <- "point"
 
@@ -552,11 +555,11 @@ new.point <- function(x,y){
   return(output) 
 }
 
-pt.a <-new.point(42,1)
-pt.b <-new.point(4,10)
-pt.c <-new.point(2,12)
+pt.a <-new.point(2,1)
+pt.b <-new.point(4,1)
+pt.c <-new.point(2,2)
 
-#3. 
+#3. Write a distance method that calculates the distance between two points in space. 
 #a^2+b^2=c^2 = sqrt(((pt2$x-pt1$x)^2)+((pt2$y-pt1$y)^2))
 
 distance1 <- function(pt1,pt2, ...){
@@ -565,30 +568,168 @@ distance1 <- function(pt1,pt2, ...){
 }
 distance1(pt.a, pt.b)
 
-#4. 
 
-Line1 <- list(x=2,5, y=7,3)
-class(Line1) <- "line"
+#4. Implement a line class that takes two point objects and makes a line between them. 
+#so not a method, a class. 
 
-class(Line1)
+new.line <- function(x,y){ 
+  output <- list(x,y) #or some distance function?
+  class(output) <- "line" 
+  return(output) 
+}
 
-#5.
+lin.a <- new.line(pt.a, pt.b)
+lin.b <- new.line(pt.b, pt.c)
+lin.c <- new.line(pt.c, pt.a)
 
-new.poly <- function(lin.a,lin.b,lin.c){ 
+class(lin.a)
+class(lin.b)
+class(lin.c)
+
+#5. Implement a polygon class that stores a polygon from point objects.
+
+new.polygon <- function (lin.a,lin.b,lin.c){ 
   output <- list(lin.a,lin.b,lin.c) 
   class(output) <- "polygon" 
   return(output) 
 }
 
-poly.a <- list(lin.a, lin.b, lin.c)
-class(poly.a) <- "polygon"
+poly.a <- new.polygon(lin.a, lin.b, lin.c)
 
 class(poly.a)
 
-#6.
+#6. 
+plot.point <- function (pt.a,...){
+  plot(pt.a$x,pt.a$y)
+}
+plot.point(pt.a)
+plot.point(pt.b)
+
+#7.
+
+plot.line <- function (pt.a, pt.b, ...){
+  segments(pt.a$x, pt.a$y, pt.b$x, pt.b$y)
+}
+
+plot.line(pt.a,pt.b)
+
+#8.
+
+plot.polygon <- function (lin.a,lin.b,lin.c,...){
+  x <- list(lin.a$x,lin.b$x,lin.c$x)
+  y <- list(lin.a$y,lin.b$y,lin.c$y)
+  polygon (x,y)
+}
+plot.polygon(pt.a,pt.b,pt.c)
+
+#9.
+
+new.circle <- function (x, y, r){
+  output <- list(x=x, y=y, r=r)
+  class(output) <- "circle"
+  return(output)
+}
 
 
+circle.a <- new.circle (2,2,5)
+
+#10.
+
+area.of.a.circle <- function (r, ...){
+  out <- pi*r^2
+  return(out)
+}
+area.of.a.circle(5)
+
+area <- function (pt.a,pt.b,pt.c){
+  distance1(pt.a,pt.b,pt.c)
+}
+area(pt.a,pt.b,pt.c)
+
+#I know the area of a polygon isn't just the distance between the points...
+#closest thing I could figure out
+#google says if you know the pts of a polygon, you can use the showlace formaula to calculate the area
+#But that was really difficult to interpret well enough from math to english I 
+#couldn't then get it into code
+
+area2 <-function(pt.a, pt.b, pt.c)
+  out <- 0.5*(c((pt.a$x, pt.a$y) + (pt.b$x, pt.b$y) + (pt.c$x, pt.c$y))-c((pt.a$x, pt.a$y) - (pt.b$x, pt.b$y) - (pt.c$x, pt.c$y))) 
+  return (out) 
+}
+
+################################################
+##   Session #4    #############################
+################################################
+
+#1.
+
+randos <-replicate(3,rnorm(10,rnorm(1),runif(1, min=0, max=1)))
+
+#2. 
+
+randomrandos <- as.data.frame(randos)
+randomrandos
+
+my_super_awesome_summary_function1<- function(x){
+  mn <- apply(x, 2, mean)
+  rng <- apply(x, 2, range)
+  return(c(mn,rng))
+}
+my_super_awesome_summary_function1(randos)
+
+#3. 
+
+my_super_awesome_categorical_summary_function <- function(x){
+  cl <- class(x)
+  known <- list(x)
+  return(c(cl,known))
+}
+
+Rascal <- list(length=40, weight=50, breed="Maine.Coone")
+class(Rascal) <- "cat"
+
+Leo <- list(length=20, weight=25, breed="Stray")
+class(Leo) <- "cat"
+
+my_super_awesome_categorical_summary_function(Rascal)
 
 
+#4. Tried, but am still getting an error
+
+plz <- ("please dear god work")
+charateristic <- !sapply (plz, is.numeric)
+
+my_super_awesome_does_it_ALL_summary_function <- function(plz){
+  numerical <- sapply (plz, is.numeric)
+  charateristic <- !sapply (plz, is.numeric)
+  rm_x <- subset (plz, numerical)
+  ch_x <- subset (plz, characteristic)
+  my_super_awesome_summary_function1 (rm_x)
+  my_super_awesome_categorical_summary_function (ch_x)
+}
+
+my_super_awesome_does_it_ALL_summary_function(1:20)
+my_super_awesome_does_it_ALL_summary_function(plz)
+
+#5  
+
+DNAsequence1 <-"ATGTGTTCCTGTTAA"
+DNAsequence2 <- "ATG"
+what.it.all.means <- (c("start", "stop", "cys", "ser"))
+codon <- (c("ATG", "TAA", "TGT", "TCC"))
+codontable <- as.data.frame(cbind(what.it.all.means, codon))
+codontable
+
+translate <- function (x, table){
+  codons <- sapply (seq (1, nchar (x), 3), function (i) substr(x,i,i+2))
+  matchy <- match (codons, table$codon)
+  return(paste(codontable$what.it.all.means[matchy]))
+}
+
+translate(DNAsequence1, codontable)
 
 
+rm(list=ls())
+
+
+#6

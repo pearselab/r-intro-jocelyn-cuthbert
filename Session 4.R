@@ -46,6 +46,8 @@ my_super_awesome_categorical_summary_function(Rascal)
 
 #4. Finally, make a summary function capable of covering both kinds of data. 
 #Hint: if your function doesn’t call the functions above, you’re likely doing it wrong.
+plz <- ("please dear god work")
+charateristic <- !sapply (plz, is.numeric)
 
 my_super_awesome_does_it_ALL_summary_function <- function(plz){
   numerical <- sapply (plz, is.numeric)
@@ -57,7 +59,7 @@ my_super_awesome_does_it_ALL_summary_function <- function(plz){
 }
 
 my_super_awesome_does_it_ALL_summary_function(1:20)
-my_super_awesome_does_it_ALL_summary_function(Leo)
+my_super_awesome_does_it_ALL_summary_function(plz)
 
 #5  A molecular biologist you owe a favour approaches you with a problem. 
 #They have a DNA sequence (e.g., ‘ACGATATACGA’) that they need to group into codons 
@@ -103,6 +105,9 @@ class(DNAsequence1)
 
 #6 Molecular biologist wants you to write a function that will take 
 #multiple sequences, translate them, and flag where sequences match
+
+
+
 
 #7 Write a summary-type function to report percentage overlap
 
