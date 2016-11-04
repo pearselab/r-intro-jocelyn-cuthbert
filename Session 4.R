@@ -65,18 +65,39 @@ my_super_awesome_does_it_ALL_summary_function(Leo)
 #input sequence and an arbitrary codon lookup table, and output the translated sequence. 
 #Hint: expand.grid will help you make a demo lookup table.
 
-sequence<-"ATGTGTTCCTGTTAA"
+#expand grid linked all possible row and columns, don't want 
+
 Codon <-sapply(seq(1,nchar(x),3))
 function(i) substr(sequence,i,i+2)
 codontable <-matrix(c("start", "stop", "cys", "ser"), ncol=4)
-  colnames("ATG", "TAA", "TGT", "TCC")
+colnames("ATG", "TAA", "TGT", "TCC")
 
-  
-  
+
+
 codon <- c("ATG", "TAA", "TGT", "TCC")
 proteins <- c("start", "stop", "cys", "ser")
 
 codontable <- as.data.frame(cbind(codon,proteins))
-  
+
 table
+
+DNAsequence1 <-'ATGTGTTCCTGTTAA'
+DNAsequence2 <- "ATG"
+
+translate <- function (x){
+  codons <- sapply(seq (1, nchar (x), 3), function (i) substr(x,i,i+2))
+  codonmatrix <- matrix(c("start", "stop", "cys", "ser"), ncol=4)
+  colnames(codontable)("ATG", "TAA", "TGT", "TCC")
+  codontable <- as.table(codonmatrix)
+  for(i in codons){
+    return(codontable$i)
+  }
+}
+
+translate(DNAsequence1)
+
+#apparently I messed up making the DNA sequence an object correctly...
+class(DNAsequence1)
+#Says character, which is correct I think?
+#changed "" to '' and now error message says it is an attempt to apply non-function...
   
