@@ -2,23 +2,22 @@
 #random numbers. Use it to create a dataset of 10 variables, each drawn from 
 #a Normal distribution with different means and variances. This can be achieved in one line.
 
-x <-replicate(1,rnorm(10,rnorm(1),runif(1, min=0, max=1)))
+randos <-replicate(3,rnorm(10,rnorm(1),runif(1, min=0, max=1)))
 
 #2. Make your own version of the summary function for continuous datasets 
 #(like the one you generated above). You don’t have to slavishly replicated 
 #summary.data.frame; write something you would find useful.
 
-#normal summary function:
-myvector <-c(0:10)
-summary(myvector)
-#Mynewsummaryfunction
+
+randomrandos <- as.data.frame(randos)
+randomrandos
+
 my_super_awesome_summary_function1<- function(x){
-  matrix(ncol(x), nrow=3)
-  mn <-mean(x)
-  rng <- range(x)
+  mn <- apply(x, 2, mean)
+  rng <- apply(x, 2, range)
   return(c(mn,rng))
 }
-my_super_awesome_summary_function1(x)
+my_super_awesome_summary_function1(randos)
 
 #3. Write a summary function to summarise datasets containing only categorical 
 #(...!is.numeric...) data.
@@ -27,7 +26,7 @@ my_super_awesome_categorical_summary_function <- function(x){
     cl <- class(x)
     known <- list(x)
     #list$length - is there a way for me to call out one of the list items?
-    return(c(cl,list$length))
+    return(c(cl,known))
 }
                                         
 Rascal <- list(length=40, weight=50, breed="Maine.Coone")
@@ -48,12 +47,13 @@ my_super_awesome_categorical_summary_function(Rascal)
 #4. Finally, make a summary function capable of covering both kinds of data. 
 #Hint: if your function doesn’t call the functions above, you’re likely doing it wrong.
 
-my_super_awesome_does_it_ALL_summary_function <- function(x){
-  if(is.numeric(x)){
-    return(my_super_awesome_summary_function(x))
-  } else {
-    return(my_super_awesome_categorical_summary_function(x))
-  }
+my_super_awesome_does_it_ALL_summary_function <- function(plz){
+  numerical <- sapply (plz, is.numeric)
+  charateristic <- !sapply (plz, is.numeric)
+  rm_x <- subset (plz, numerical)
+  ch_x <- subset (plz, characteristic)
+  my_super_awesome_summary_function1 (rm_x)
+  my_super_awesome_categorical_summary_function (ch_x)
 }
 
 my_super_awesome_does_it_ALL_summary_function(1:20)
@@ -68,25 +68,11 @@ my_super_awesome_does_it_ALL_summary_function(Leo)
 
 #expand grid linked all possible row and columns, don't want 
 
-Codon <-sapply(seq(1,nchar(x),3))
-function(i) substr(sequence,i,i+2)
-codontable <-matrix(c("start", "stop", "cys", "ser"), ncol=4)
-colnames <- ("ATG", "TAA", "TGT", "TCC")
-
-
-
-codon <- c("ATG", "TAA", "TGT", "TCC")
-proteins <- c("start", "stop", "cys", "ser")
-
-codontable <- as.data.frame(cbind(codon,proteins))
-
-table
-
-DNAsequence1 <-'ATGTGTTCCTGTTAA'
+DNAsequence1 <-"ATGTGTTCCTGTTAA"
 DNAsequence2 <- "ATG"
 what.it.all.means <- (c("start", "stop", "cys", "ser"))
 codon <- (c("ATG", "TAA", "TGT", "TCC"))
-codontable <- as.data.frame(cbind(codonmatrix, codon))
+codontable <- as.data.frame(cbind(what.it.all.means, codon))
 codontable
 
 translate <- function (x, table){
@@ -97,15 +83,18 @@ translate <- function (x, table){
 
 translate(DNAsequence1, codontable)
 
-translate <- function (x){
-  codons <- sapply(seq (1, nchar (x), 3), function (i) substr(x,i,i+2))
-  codonmatrix <- matrix(c("start", "stop", "cys", "ser"), ncol=4)
-  colnames(codontable) <- ("ATG", "TAA", "TGT", "TCC")
-  codontable <- as.table(codonmatrix)
-  for(i in codons){
-    return(codontable$i)
-  }
-}
+rm(list=ls())
+
+#what I had before
+#translate <- function (x){
+#  codons <- sapply(seq (1, nchar (x), 3), function (i) substr(x,i,i+2))
+#  codonmatrix <- matrix(c("start", "stop", "cys", "ser"), ncol=4)
+#  colnames(codontable) <- ("ATG", "TAA", "TGT", "TCC")
+#  codontable <- as.table(codonmatrix)
+#  for(i in codons){
+#    return(codontable$i)
+#  }
+#}
 
 #apparently I messed up making the DNA sequence an object correctly...
 class(DNAsequence1)
