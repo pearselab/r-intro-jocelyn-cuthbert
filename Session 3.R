@@ -104,10 +104,10 @@ class(poly.a)
 #plot(3 ~ 1)
 #plot(1:2, 4:5, type="l")
 
-plot.points <- function (pt.a,...){
+plot.point <- function (pt.a,...){
   plot(pt.a$x,pt.a$y)
 }
-plot.points(pt.a)
+plot.point(pt.a)
 #works, but this is only one point
 plot.points <- function (pt.a, pt.b, ...){
   plot(pt.a$x:pt.a$y, pt.b$x:pt.b$y)
@@ -195,12 +195,12 @@ line2<- new.line(pt.b$x, pt.b$y, pt.c$x, pt.c$y)
 line3<- new.line(pt.a$x, pt.a$y, pt.b$x, pt.b$y)
 
 #7. Write a plot method for a polygon. Hint: if this isn’t trivial, you’re doing something wrong. 
-plot_poly <- function (lin.a,lin.b,lin.c,...){
+plot.polygon <- function (lin.a,lin.b,lin.c,...){
   x <- list(lin.a$x,lin.b$x,lin.c$x)
   y <- list(lin.a$y,lin.b$y,lin.c$y)
   polygon (x,y)
 }
-plot_poly(pt.a,pt.b,pt.c)
+plot.polygon(pt.a,pt.b,pt.c)
 
 #gah still mad at me for not calling plot new.
 # the difference between 
@@ -215,15 +215,64 @@ lines(1:2, 3:4)
 #8. Create a canvas object that the add function can add point, line, circle, and polygon objects to.
 #Write plot and print methods for this class.
 
+new.canvas <- function (point, line, circle, polygon){
+  output <- list(point=point, line=line, circle=circle, polygon=polygon)
+  class(output) <- "canvas"
+  return(output)
+}
 
+print.canvas <- function (ob, ...){
+  return(ob)
+}
 
-#9. Implement a circle object that takes a point and a radius and stores a circle. Don’t make a circle out of lines!
+plot.canvas <- function (ob1,ob2,ob3, ...){
+  plot.point (ob1)
+  plot.line (ob1, ob2)
+  plot.polygon (ob1, ob2, ob3)
+}
+
+plot.canvas (pt.c, pt.b, pt.a)
+# Error message that argument pt.c is missing with no default.
+#Error message is still addressing the plot.new()function
+#Even when I traced back up and triple checked pt.c was
+#put into a pt class/new object and reran plot.new on pts. 
+
+#9. Implement a circle object that takes a point and a radius and 
+#stores a circle. Don’t make a circle out of lines!
 
   
 
 #10. Write area generic methods for circle and polygon objects. 
+area <- function(pt.a,pt.b,pt.c){
+  distance1(pt.a,pt.b,pt.c)
+  
+}
+area <- function (r){
+  UseMethod("area")
+}
+area(5)
 
+#circle worked, polygon didn't
+#really a polygon is more difficult than a circle though
+#Circle you only need one variable, r
+#for a polygon, the # of sides is unknown, so the 
+#equation is unknown - triangle, its area = height x base /2
+# for a square its just height X base
+#google says if you know the pts of a polygon, you can use the showlace formaula to calculate the area
+#so for 3 pts it would be
 
+area <-function(pt.a, pt.b, pt.c) #unexpected comma here error
+  out <- 0.5 (((pt.a$x, pt.a$y) + (pt.b$x, pt.b$y) + (pt.c$x, pt.c$y)-((pt.a$x, pt.a$y) - (pt.b$x, pt.b$y) - (pt.c$x, pt.c$y)) 
+               #unexpected commas in the line above
+               #oh god....I don't think I interpreted those maths right at all
+  return (out) #error object out not found? but it worked for circle...
+}
+
+area.of.a.circle <- function (r, ...){
+  out <- pi*r^2
+  return(out)
+}
+area.of.a.circle(5)
 
 #11. Add support for circle objects to your canvas. 
 
