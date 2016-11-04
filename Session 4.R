@@ -100,4 +100,14 @@ translate(DNAsequence1)
 class(DNAsequence1)
 #Says character, which is correct I think?
 #changed "" to '' and now error message says it is an attempt to apply non-function...
+
+#6 Molecular biologist wants you to write a function that will take 
+#multiple sequences, translate them, and flag where sequences match
+
+#7 Write a summary-type function to report percentage overlap
+
+#8 no ignoring start and stop codons! (although I'm just saying here I totally put them in)
+# So if I remembered stop and start codons even though they didn't,
+#do I still need to do this problem?
+#Cut off all bits before start, and after stop codon
   
